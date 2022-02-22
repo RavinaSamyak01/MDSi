@@ -52,11 +52,12 @@ public class MDSiOrderCreation extends StartUp {
 			}
 
 			String Job = driver.findElement(By.id("MainContent_lblresult")).getText();
+			System.out.println("Response=" + Job);
 
 			if (Job.contains("<a:ErrorCode i:nil=\"true\" />")) {
 				jobNum = Job.replaceAll("[^0-9]", "");
 				String[] list = jobNum.split("");
-				jobid = (list[15] + list[16] + list[17] + list[18] + list[19] + list[20] + list[21] + list[22]);
+				jobid = (list[27] + list[28] + list[29] + list[30] + list[31] + list[32] + list[33] + list[34]);
 				System.out.println("JOB# " + jobid);
 
 				File src1 = new File(".\\src\\TestFiles\\MDSiTestResult.xlsx");
@@ -78,8 +79,9 @@ public class MDSiOrderCreation extends StartUp {
 		String subject = "Selenium Automation Script: STAGING MDSi_EDI - Shipment Creation";
 		// asharma@samyak.com,pgandhi@samyak.com,kunjan.modi@samyak.com,pdoshi@samyak.com
 		try {
-			Email.sendMail("ravina.prajapati@samyak.com, asharma@samyak.com,parth.doshi@samyak.com, pgandhi@samyak.com",
-					subject, msg.toString(), "");
+
+			Email.sendMail("ravina.prajapati@samyak.com, asharma@samyak.com", subject, msg.toString(), "");
+
 		} catch (Exception ex) {
 			Logger.getLogger(MDSiOrderCreation.class.getName()).log(Level.SEVERE, null, ex);
 		}
