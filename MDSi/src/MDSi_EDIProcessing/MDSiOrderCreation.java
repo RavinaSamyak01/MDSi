@@ -18,7 +18,7 @@ public class MDSiOrderCreation extends StartUp {
 	static String jobid, jobNum1, jobNum;
 
 	@Test
-	public static void mdSiOrderCreation() throws Exception {
+	public  void mdSiOrderCreation() throws Exception {
 		String baseUrl = "http://10.20.104.82:9077/TestApplicationUtility/MDSIOrderCreation";
 		driver.get(baseUrl);
 
@@ -34,7 +34,7 @@ public class MDSiOrderCreation extends StartUp {
 			DataFormatter formatter = new DataFormatter();
 			String file = formatter.formatCellValue(sh1.getRow(i).getCell(0));
 			driver.findElement(By.id("MainContent_ctrlfileupload"))
-					.sendKeys("C:\\Ravina\\MDSi\\src\\TestFiles\\" + file + ".xml");
+					.sendKeys("C:\\Users\\rprajapati\\git\\MDSi\\MDSi\\src\\TestFiles\\" + file + ".xml");
 			Thread.sleep(1000);
 			driver.findElement(By.id("MainContent_btnProcess")).click();
 			Thread.sleep(5000);
@@ -80,7 +80,7 @@ public class MDSiOrderCreation extends StartUp {
 		// asharma@samyak.com,pgandhi@samyak.com,kunjan.modi@samyak.com,pdoshi@samyak.com
 		try {
 
-			Email.sendMail("ravina.prajapati@samyak.com, asharma@samyak.com", subject, msg.toString(), "");
+			Email.sendMail("ravina.prajapati@samyak.com,asharma@samyak.com,parth.doshi@samyak.com", subject, msg.toString(), "");
 
 		} catch (Exception ex) {
 			Logger.getLogger(MDSiOrderCreation.class.getName()).log(Level.SEVERE, null, ex);
@@ -89,17 +89,17 @@ public class MDSiOrderCreation extends StartUp {
 
 	public static void fedEXCarrier() throws Exception {
 		Thread.sleep(5000);
-		Screenshots.takeSnapShot(driver, ".\\src\\TestFiles\\H3P_WithFedExCarrier.jpg");
+		Screenshots.takeSnapShot(driver, ".\\H3P_WithFedExCarrier.jpg");
 	}
 
 	public static void upsCarrier() throws Exception {
 		Thread.sleep(5000);
-		Screenshots.takeSnapShot(driver, ".\\src\\TestFiles\\H3P_WithUPSCarrier.jpg");
+		Screenshots.takeSnapShot(driver, ".\\H3P_WithUPSCarrier.jpg");
 	}
 
 	public static void cpuService() throws Exception {
 		Thread.sleep(5000);
-		Screenshots.takeSnapShot(driver, ".\\src\\TestFiles\\CPUService.jpg");
+		Screenshots.takeSnapShot(driver, ".\\CPUService.jpg");
 	}
 
 }

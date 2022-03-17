@@ -9,6 +9,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 public class MDSiOrderTracking extends StartUp {
@@ -17,15 +19,9 @@ public class MDSiOrderTracking extends StartUp {
 	static StringBuilder msg = new StringBuilder();
 
 	@Test
-	public static void mdSiOrderTracking() throws Exception {
-		/*
-		 * System.setProperty("webdriver.chrome.driver", ".\\chromedriver.exe");
-		 * 
-		 * ChromeOptions options = new ChromeOptions(); driver = new
-		 * ChromeDriver(options); driver.manage().window().maximize();
-		 */
-		// String baseUrl =
-		// "http://10.20.104.82:9077/TestApplicationUtility/MDSITrackOrderClient";
+	public  void mdSiOrderTracking() throws Exception {
+		WebDriverWait wait= new WebDriverWait(driver,50);
+		
 		driver.get("http://10.20.104.82:9077/TestApplicationUtility/MDSITrackOrderClient");
 
 		Thread.sleep(5000);
@@ -40,7 +36,10 @@ public class MDSiOrderTracking extends StartUp {
 			DataFormatter formatter = new DataFormatter();
 			String JobID = formatter.formatCellValue(sh1.getRow(i).getCell(1));
 
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("MainContent_HyperLinkJobID")));
 			driver.findElement(By.id("MainContent_HyperLinkJobID")).click();
+			Thread.sleep(2000);
+
 			driver.findElement(By.id("MainContent_txtJobID")).clear();
 			driver.findElement(By.id("MainContent_txtJobID")).sendKeys(JobID);
 
@@ -63,8 +62,7 @@ public class MDSiOrderTracking extends StartUp {
 		String subject = "Selenium Automation Script STAGING : MDSi_EDI - Shipment Tracking";
 //		/// asharma@samyak.com,pgandhi@samyak.com,kunjan.modi@samyak.com,pdoshi@samyak.com
 		try {
-			Email.sendMail("ravina.prajapati@samyak.com, asharma@samyak.com,parth.doshi@samyak.com, pgandhi@samyak.com",
-					subject, msg.toString(), "");
+			Email.sendMail("ravina.prajapati@samyak.com,asharma@samyak.com,parth.doshi@samyak.com",subject, msg.toString(), "");
 		} catch (Exception ex) {
 			Logger.getLogger(MDSiOrderCreation.class.getName()).log(Level.SEVERE, null, ex);
 		}
