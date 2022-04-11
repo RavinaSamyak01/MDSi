@@ -19,9 +19,9 @@ public class MDSiOrderTracking extends StartUp {
 	static StringBuilder msg = new StringBuilder();
 
 	@Test
-	public  void mdSiOrderTracking() throws Exception {
-		WebDriverWait wait= new WebDriverWait(driver,50);
-		
+	public void mdSiOrderTracking() throws Exception {
+		WebDriverWait wait = new WebDriverWait(driver, 50);
+
 		driver.get("http://10.20.104.82:9077/TestApplicationUtility/MDSITrackOrderClient");
 
 		Thread.sleep(5000);
@@ -32,10 +32,10 @@ public class MDSiOrderTracking extends StartUp {
 		Workbook workbook = WorkbookFactory.create(fis);
 		Sheet sh1 = workbook.getSheet("Sheet1");
 
-		for (int i = 1; i < 2; i++) {
+		for (int i = 1; i < 4; i++) {
 			DataFormatter formatter = new DataFormatter();
 			String JobID = formatter.formatCellValue(sh1.getRow(i).getCell(1));
-
+			System.out.println("Job Id is==" + JobID);
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("MainContent_HyperLinkJobID")));
 			driver.findElement(By.id("MainContent_HyperLinkJobID")).click();
 			Thread.sleep(2000);
@@ -62,7 +62,8 @@ public class MDSiOrderTracking extends StartUp {
 		String subject = "Selenium Automation Script STAGING : MDSi_EDI - Shipment Tracking";
 //		/// asharma@samyak.com,pgandhi@samyak.com,kunjan.modi@samyak.com,pdoshi@samyak.com
 		try {
-			Email.sendMail("ravina.prajapati@samyak.com,asharma@samyak.com,parth.doshi@samyak.com",subject, msg.toString(), "");
+			Email.sendMail("ravina.prajapati@samyak.com,asharma@samyak.com,parth.doshi@samyak.com", subject,
+					msg.toString(), "");
 		} catch (Exception ex) {
 			Logger.getLogger(MDSiOrderCreation.class.getName()).log(Level.SEVERE, null, ex);
 		}
