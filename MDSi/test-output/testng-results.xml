@@ -2,20 +2,20 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2022-04-11T09:39:07 IST" name="Default suite" finished-at="2022-04-11T09:39:31 IST" duration-ms="23485">
+  <suite started-at="2022-04-12T11:43:24 IST" name="Default suite" finished-at="2022-04-12T11:44:11 IST" duration-ms="46438">
     <groups>
     </groups>
-    <test started-at="2022-04-11T09:39:07 IST" name="Default test" finished-at="2022-04-11T09:39:31 IST" duration-ms="23485">
+    <test started-at="2022-04-12T11:43:24 IST" name="Default test" finished-at="2022-04-12T11:44:11 IST" duration-ms="46438">
       <class name="MDSi_EDIProcessing.MDSiOrderTracking">
-        <test-method is-config="true" signature="startUp()[pri:0, instance:MDSi_EDIProcessing.MDSiOrderTracking@18df8434]" started-at="2022-04-11T09:39:05 IST" name="startUp" finished-at="2022-04-11T09:39:07 IST" duration-ms="2165" status="PASS">
+        <test-method is-config="true" signature="startUp()[pri:0, instance:MDSi_EDIProcessing.MDSiOrderTracking@65c7a252]" started-at="2022-04-12T11:43:23 IST" name="startUp" finished-at="2022-04-12T11:43:24 IST" duration-ms="1553" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- startUp -->
-        <test-method signature="mdSiOrderTracking()[pri:0, instance:MDSi_EDIProcessing.MDSiOrderTracking@18df8434]" started-at="2022-04-11T09:39:07 IST" name="mdSiOrderTracking" finished-at="2022-04-11T09:39:31 IST" duration-ms="23430" status="PASS">
+        <test-method signature="mdSiOrderTracking()[pri:0, instance:MDSi_EDIProcessing.MDSiOrderTracking@65c7a252]" started-at="2022-04-12T11:43:24 IST" name="mdSiOrderTracking" finished-at="2022-04-12T11:44:11 IST" duration-ms="46400" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- mdSiOrderTracking -->
-        <test-method is-config="true" signature="Complete()[pri:0, instance:MDSi_EDIProcessing.MDSiOrderTracking@18df8434]" started-at="2022-04-11T09:39:31 IST" name="Complete" finished-at="2022-04-11T09:39:31 IST" duration-ms="53" status="PASS">
+        <test-method is-config="true" signature="Complete()[pri:0, instance:MDSi_EDIProcessing.MDSiOrderTracking@65c7a252]" started-at="2022-04-12T11:44:11 IST" name="Complete" finished-at="2022-04-12T11:44:11 IST" duration-ms="47" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Complete -->

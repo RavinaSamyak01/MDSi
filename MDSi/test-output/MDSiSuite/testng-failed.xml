@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite parallel="none" name="Failed suite [MDSiSuite]">
-  <test parallel="none" name="MDSiOrderCreation(failed)">
-    <classes>
-      <class name="MDSi_EDIProcessing.MDSiOrderCreation">
-        <methods>
-          <include name="mdSiOrderCreation"/>
-        </methods>
-      </class> <!-- MDSi_EDIProcessing.MDSiOrderCreation -->
-      <class name="MDSi_EDIProcessing.MDSiOrderTracking">
-        <methods>
-          <include name="startUp"/>
-          <include name="Complete"/>
-        </methods>
-      </class> <!-- MDSi_EDIProcessing.MDSiOrderTracking -->
-    </classes>
-  </test> <!-- MDSiOrderCreation(failed) -->
-  <test parallel="none" name="MDSiOrderTracking(failed)">
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [MDSiSuite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="MDSiOrderTracking(failed)">
     <classes>
       <class name="MDSi_EDIProcessing.MDSiOrderTracking">
         <methods>

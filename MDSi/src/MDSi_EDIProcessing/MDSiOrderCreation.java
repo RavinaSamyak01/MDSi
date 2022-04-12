@@ -18,14 +18,14 @@ public class MDSiOrderCreation extends StartUp {
 	static String jobid, jobNum1, jobNum;
 
 	@Test
-	public  void mdSiOrderCreation() throws Exception {
+	public void mdSiOrderCreation() throws Exception {
 		String baseUrl = "http://10.20.104.82:9077/TestApplicationUtility/MDSIOrderCreation";
 		driver.get(baseUrl);
 
 		Thread.sleep(5000);
 
 		// Read data from Excel
-		File src = new File(".//src//TestFiles//MDSiTestResult.xlsx");
+		File src = new File(".\\src\\TestFiles\\MDSiTestResult.xlsx");
 		FileInputStream fis = new FileInputStream(src);
 		Workbook workbook = WorkbookFactory.create(fis);
 		Sheet sh1 = workbook.getSheet("Sheet1");
@@ -33,6 +33,7 @@ public class MDSiOrderCreation extends StartUp {
 		for (int i = 1; i < 4; i++) {
 			DataFormatter formatter = new DataFormatter();
 			String file = formatter.formatCellValue(sh1.getRow(i).getCell(0));
+			System.out.println("file Name==" + file + ".xml");
 			driver.findElement(By.id("MainContent_ctrlfileupload"))
 					.sendKeys("C:\\Users\\rprajapati\\git\\MDSi\\MDSi\\src\\TestFiles\\" + file + ".xml");
 			Thread.sleep(1000);
@@ -80,7 +81,8 @@ public class MDSiOrderCreation extends StartUp {
 		// asharma@samyak.com,pgandhi@samyak.com,kunjan.modi@samyak.com,pdoshi@samyak.com
 		try {
 
-			Email.sendMail("ravina.prajapati@samyak.com,asharma@samyak.com,parth.doshi@samyak.com", subject, msg.toString(), "");
+			Email.sendMail("ravina.prajapati@samyak.com,asharma@samyak.com,parth.doshi@samyak.com", subject,
+					msg.toString(), "");
 
 		} catch (Exception ex) {
 			Logger.getLogger(MDSiOrderCreation.class.getName()).log(Level.SEVERE, null, ex);
