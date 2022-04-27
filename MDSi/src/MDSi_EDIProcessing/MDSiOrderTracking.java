@@ -9,6 +9,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
@@ -21,26 +23,30 @@ public class MDSiOrderTracking extends StartUp {
 	@Test
 	public void mdSiOrderTracking() throws Exception {
 		WebDriverWait wait = new WebDriverWait(driver, 50);
-
+		Actions act = new Actions(driver);
 		driver.get("http://10.20.104.82:9077/TestApplicationUtility/MDSITrackOrderClient");
 
-		Thread.sleep(5000);
-
+		wait.until(
+				ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[contains(@class,'body-content')]")));
 		// Read data from Excel
 		File src = new File(".\\src\\TestFiles\\MDSiTestResult.xlsx");
 		FileInputStream fis = new FileInputStream(src);
 		Workbook workbook = WorkbookFactory.create(fis);
 		Sheet sh1 = workbook.getSheet("Sheet1");
 
+		WebElement JobIDLink = driver.findElement(By.id("MainContent_HyperLinkJobID"));
+		act.moveToElement(JobIDLink).build().perform();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("MainContent_HyperLinkJobID")));
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("MainContent_HyperLinkJobID")));
-		driver.findElement(By.id("MainContent_HyperLinkJobID")).click();
-		Thread.sleep(2000);
-		
+		act.moveToElement(JobIDLink).click().perform();
+
+		wait.until(
+				ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[contains(@class,'body-content')]")));
 		for (int i = 1; i < 4; i++) {
 			DataFormatter formatter = new DataFormatter();
 			String JobID = formatter.formatCellValue(sh1.getRow(i).getCell(1));
 			System.out.println("Job Id is==" + JobID);
-
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("MainContent_txtJobID")));
 			driver.findElement(By.id("MainContent_txtJobID")).clear();
 			driver.findElement(By.id("MainContent_txtJobID")).sendKeys(JobID);
 
