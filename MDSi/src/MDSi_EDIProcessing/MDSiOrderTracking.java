@@ -71,9 +71,9 @@ public class MDSiOrderTracking extends StartUp {
 			System.out.println("MDSi Track Order DONE !");
 			end = System.nanoTime();
 			TrackingTime = (end - start) * 1.0e-9;
-			System.out.println("Order Creation Time (in Seconds) = " + TrackingTime);
-			msg.append("Order Creation Time (in Seconds) = " + TrackingTime + "\n");
-			msg.append("\n\n" + "Response :" + "\n" + Job + "\n\n");
+			System.out.println("Tracking Time (in Seconds) = " + TrackingTime);
+			msg.append("Tracking Time (in Seconds) = " + TrackingTime + "\n");
+			msg.append("Response :" + "\n" + Job + "\n\n");
 
 		}
 		String subject = "Selenium Automation Script STAGING : MDSi_EDI - Shipment Tracking";
