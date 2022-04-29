@@ -2,12 +2,10 @@
 
 <html>
   <head>
-  <meta charset='utf-8'>
   <title>TestNG reports</title>
 
-    <link type="text/css" href="testng-reports1.css" rel="stylesheet" id="ultra" />
-    <link type="text/css" href="testng-reports.css" rel="stylesheet" id="retro" disabled="false"/>
-    <script type="text/javascript" src="jquery.min.js"></script>
+    <link type="text/css" href="testng-reports.css" rel="stylesheet" />  
+    <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="testng-reports.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type='text/javascript'>
@@ -24,9 +22,8 @@
   <body>
     <div class="top-banner-root">
       <span class="top-banner-title-font">Test results</span>
-      <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
       <br/>
-      <span class="top-banner-font-1">1 suite</span>
+      <span class="top-banner-font-1">1 suite, 1 failed test</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -40,7 +37,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" panel-name="suite-MDSiSuite" class="navigator-link">
-              <span class="suite-name border-passed">MDSiSuite</span>
+              <span class="suite-name border-failed">MDSiSuite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -93,7 +90,21 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">2 methods,   2 passed</span>
+                    <span class="method-stats">2 methods, 1 failed,   1 passed</span>
+                  </li>
+                  <li>
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-MDSiSuite" class="hide-methods failed suite-MDSiSuite"> (hide)</a> <!-- hide-methods failed suite-MDSiSuite -->
+                      <a href="#" panel-name="suite-MDSiSuite" class="show-methods failed suite-MDSiSuite"> (show)</a> <!-- show-methods failed suite-MDSiSuite -->
+                    </span>
+                    <div class="method-list-content failed suite-MDSiSuite">
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-MDSiSuite" title="MDSi_EDIProcessing.MDSiOrderTracking" class="method navigator-link" hash-for-method="mdSiOrderTracking">mdSiOrderTracking</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-MDSiSuite -->
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -105,11 +116,6 @@
                       <span>
                         <img src="passed.png" width="3%"/>
                         <a href="#" panel-name="suite-MDSiSuite" title="MDSi_EDIProcessing.MDSiOrderCreation" class="method navigator-link" hash-for-method="mdSiOrderCreation">mdSiOrderCreation</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-MDSiSuite" title="MDSi_EDIProcessing.MDSiOrderTracking" class="method navigator-link" hash-for-method="mdSiOrderTracking">mdSiOrderTracking</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-MDSiSuite -->
@@ -124,9 +130,9 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-MDSiSuite" class="panel MDSiSuite">
-          <div class="suite-MDSiSuite-class-passed">
+          <div class="suite-MDSiSuite-class-failed">
             <div class="main-panel-header rounded-window-top">
-              <img src="passed.png"/>
+              <img src="failed.png"/>
               <span class="class-name">MDSi_EDIProcessing.MDSiOrderTracking</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
@@ -135,10 +141,29 @@
                   <a name="mdSiOrderTracking">
                   </a> <!-- mdSiOrderTracking -->
                   <span class="method-name">mdSiOrderTracking</span>
+                  <div class="stack-trace">org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.id: MainContent_txtJobID (tried for 50 second(s) with 500 milliseconds interval)
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:81)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:271)
+	at MDSi_EDIProcessing.MDSiOrderTracking.mdSiOrderTracking(MDSiOrderTracking.java:49)
+Caused by: org.openqa.selenium.NoSuchElementException: Cannot locate an element using By.id: MainContent_txtJobID
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;3.13.0&apos;, revision: &apos;2f0d292&apos;, time: &apos;2018-06-25T15:32:14.902Z&apos;
+System info: host: &apos;SIPL92&apos;, ip: &apos;10.212.130.47&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;11.0.13&apos;
+Driver info: driver.version: unknown
+	at org.openqa.selenium.support.ui.ExpectedConditions.lambda$findElement$0(ExpectedConditions.java:896)
+	at java.base/java.util.Optional.orElseThrow(Optional.java:408)
+	at org.openqa.selenium.support.ui.ExpectedConditions.findElement(ExpectedConditions.java:895)
+	at org.openqa.selenium.support.ui.ExpectedConditions.access$000(ExpectedConditions.java:44)
+	at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:206)
+	at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:202)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:248)
+	... 24 more
+... Removed 23 stack frames
+</div> <!-- stack-trace -->
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-MDSiSuite-class-passed -->
+          </div> <!-- suite-MDSiSuite-class-failed -->
           <div class="suite-MDSiSuite-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
@@ -162,8 +187,8 @@
           <div class="main-panel-content rounded-window-bottom">
             <pre>
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
-&lt;suite name=&quot;MDSiSuite&quot; guice-stage=&quot;DEVELOPMENT&quot;&gt;
+&lt;!DOCTYPE suite SYSTEM &quot;http://testng.org/testng-1.0.dtd&quot;&gt;
+&lt;suite parallel=&quot;none&quot; name=&quot;MDSiSuite&quot;&gt;
   &lt;test thread-count=&quot;5&quot; name=&quot;MDSiOrderCreation&quot;&gt;
     &lt;classes&gt;
       &lt;class name=&quot;MDSi_EDIProcessing.MDSiOrderCreation&quot;/&gt;
@@ -218,16 +243,16 @@ data.addRows(2);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'mdSiOrderCreation')
 data.setCell(0, 2, 'MDSi_EDIProcessing.MDSiOrderCreation')
-data.setCell(0, 3, 63766);
+data.setCell(0, 3, 73474);
 data.setCell(1, 0, 1)
 data.setCell(1, 1, 'mdSiOrderTracking')
 data.setCell(1, 2, 'MDSi_EDIProcessing.MDSiOrderTracking')
-data.setCell(1, 3, 42156);
+data.setCell(1, 3, 51972);
 window.suiteTableData['MDSiSuite']= { tableData: data, tableDiv: 'times-div-MDSiSuite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 1 minutes</span>
+              <span class="suite-total-time">Total running time: 2 minutes</span>
               <div id="times-div-MDSiSuite">
               </div> <!-- times-div-MDSiSuite -->
             </div> <!-- times-div -->
@@ -263,23 +288,24 @@ return data;
               <div class="chronological-class-name">MDSi_EDIProcessing.MDSiOrderCreation</div> <!-- chronological-class-name -->
               <div class="test-method">
                 <span class="method-name">mdSiOrderCreation</span>
-                <span class="method-start">1941 ms</span>
+                <span class="method-start">2675 ms</span>
               </div> <!-- test-method -->
             </div> <!-- chronological-class -->
             <div class="chronological-class">
               <div class="chronological-class-name">MDSi_EDIProcessing.MDSiOrderTracking</div> <!-- chronological-class-name -->
               <div class="test-method">
+                <img src="failed.png">
+                </img>
                 <span class="method-name">mdSiOrderTracking</span>
-                <span class="method-start">65766 ms</span>
+                <span class="method-start">76197 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-suite after">
                 <span class="method-name">Complete</span>
-                <span class="method-start">107938 ms</span>
+                <span class="method-start">128194 ms</span>
               </div> <!-- configuration-suite after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
       </div> <!-- main-panel-root -->
     </div> <!-- wrapper -->
   </body>
-<script type="text/javascript" src="testng-reports2.js"></script>
 </html>

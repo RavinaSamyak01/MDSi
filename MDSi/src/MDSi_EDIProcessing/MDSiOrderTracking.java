@@ -19,9 +19,12 @@ public class MDSiOrderTracking extends StartUp {
 
 	// static WebDriver driver;
 	static StringBuilder msg = new StringBuilder();
+	static double TrackingTime;
 
 	@Test
 	public void mdSiOrderTracking() throws Exception {
+		long start, end;
+
 		WebDriverWait wait = new WebDriverWait(driver, 50);
 		Actions act = new Actions(driver);
 		driver.get("http://10.20.104.82:9077/TestApplicationUtility/MDSITrackOrderClient");
@@ -46,6 +49,7 @@ public class MDSiOrderTracking extends StartUp {
 			DataFormatter formatter = new DataFormatter();
 			String JobID = formatter.formatCellValue(sh1.getRow(i).getCell(1));
 			System.out.println("Job Id is==" + JobID);
+			msg.append("Job Id is==" + JobID + "\n");
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("MainContent_txtJobID")));
 			driver.findElement(By.id("MainContent_txtJobID")).clear();
 			driver.findElement(By.id("MainContent_txtJobID")).sendKeys(JobID);
@@ -57,12 +61,18 @@ public class MDSiOrderTracking extends StartUp {
 			driver.findElement(By.id("MainContent_txtPassword")).sendKeys("MDSI_WS_14");
 
 			driver.findElement(By.id("MainContent_ButtonTrackOrder")).click();
+			// --Start time
+			start = System.nanoTime();
 			Thread.sleep(6000);
 
 			Screenshots.takeSnapShot(driver, ".\\src\\TestFiles\\MDSiTracking.jpg");
 			Thread.sleep(3000);
 			String Job = driver.findElement(By.id("MainContent_lblTrackOrderresult")).getText();
 			System.out.println("MDSi Track Order DONE !");
+			end = System.nanoTime();
+			TrackingTime = (end - start) * 1.0e-9;
+			System.out.println("Order Creation Time (in Seconds) = " + TrackingTime);
+			msg.append("Order Creation Time (in Seconds) = " + TrackingTime + "\n");
 			msg.append("\n\n" + "Response :" + "\n" + Job + "\n\n");
 
 		}

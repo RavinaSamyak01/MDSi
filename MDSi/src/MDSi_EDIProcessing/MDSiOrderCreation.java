@@ -16,9 +16,11 @@ import org.testng.annotations.Test;
 public class MDSiOrderCreation extends StartUp {
 	static StringBuilder msg = new StringBuilder();
 	static String jobid, jobNum1, jobNum;
+	static double OrderCreationTime;
 
 	@Test
 	public void mdSiOrderCreation() throws Exception {
+		long start, end;
 		String baseUrl = "http://10.20.104.82:9077/TestApplicationUtility/MDSIOrderCreation";
 		driver.get(baseUrl);
 
@@ -38,6 +40,8 @@ public class MDSiOrderCreation extends StartUp {
 					.sendKeys("C:\\Users\\rprajapati\\git\\MDSi\\MDSi\\src\\TestFiles\\" + file + ".xml");
 			Thread.sleep(1000);
 			driver.findElement(By.id("MainContent_btnProcess")).click();
+			//--Start time for checking import file 
+			start = System.nanoTime();
 			Thread.sleep(5000);
 
 			if (i == 1) {
@@ -54,6 +58,10 @@ public class MDSiOrderCreation extends StartUp {
 
 			String Job = driver.findElement(By.id("MainContent_lblresult")).getText();
 			System.out.println("Response=" + Job);
+			end = System.nanoTime();
+			OrderCreationTime = (end - start) * 1.0e-9;
+			System.out.println("Order Creation Time (in Seconds) = " + OrderCreationTime);
+			msg.append("Order Creation Time (in Seconds) = " + OrderCreationTime + "\n");
 
 			if (Job.contains("<a:ErrorCode i:nil=\"true\" />")) {
 				jobNum = Job.replaceAll("[^0-9]", "");
