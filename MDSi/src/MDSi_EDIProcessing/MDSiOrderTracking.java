@@ -28,7 +28,7 @@ public class MDSiOrderTracking extends StartUp {
 		WebDriverWait wait = new WebDriverWait(driver, 50);
 		Actions act = new Actions(driver);
 		driver.get("http://10.20.104.82:9077/TestApplicationUtility/MDSITrackOrderClient");
-
+		
 		wait.until(
 				ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[contains(@class,'body-content')]")));
 		// Read data from Excel
@@ -45,12 +45,13 @@ public class MDSiOrderTracking extends StartUp {
 
 		wait.until(
 				ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[contains(@class,'body-content')]")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("MainContent_txtJobID")));
+
 		for (int i = 1; i < 4; i++) {
 			DataFormatter formatter = new DataFormatter();
 			String JobID = formatter.formatCellValue(sh1.getRow(i).getCell(1));
 			System.out.println("Job Id is==" + JobID);
 			msg.append("Job Id is==" + JobID + "\n");
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("MainContent_txtJobID")));
 			driver.findElement(By.id("MainContent_txtJobID")).clear();
 			driver.findElement(By.id("MainContent_txtJobID")).sendKeys(JobID);
 
