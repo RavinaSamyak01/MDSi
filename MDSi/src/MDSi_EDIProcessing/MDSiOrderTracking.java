@@ -9,6 +9,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -27,8 +29,9 @@ public class MDSiOrderTracking extends StartUp {
 
 		WebDriverWait wait = new WebDriverWait(driver, 50);
 		Actions act = new Actions(driver);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
 		driver.get("http://10.20.104.82:9077/TestApplicationUtility/MDSITrackOrderClient");
-		
+
 		wait.until(
 				ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[contains(@class,'body-content')]")));
 		// Read data from Excel
@@ -36,6 +39,21 @@ public class MDSiOrderTracking extends StartUp {
 		FileInputStream fis = new FileInputStream(src);
 		Workbook workbook = WorkbookFactory.create(fis);
 		Sheet sh1 = workbook.getSheet("Sheet1");
+
+		js.executeScript("window.scrollBy(0,-250)");
+		Thread.sleep(2000);
+
+		// Default size
+		Dimension currentDimension = driver.manage().window().getSize();
+		int height = currentDimension.getHeight();
+		int width = currentDimension.getWidth();
+		System.out.println("Current height: " + height);
+		System.out.println("Current width: " + width);
+		System.out.println("window size==" + driver.manage().window().getSize());
+
+		Dimension newDimension = new Dimension(745, 600);
+		driver.manage().window().setSize(newDimension);
+		Thread.sleep(2000);
 
 		WebElement JobIDLink = driver.findElement(By.id("MainContent_HyperLinkJobID"));
 		act.moveToElement(JobIDLink).build().perform();
@@ -45,13 +63,20 @@ public class MDSiOrderTracking extends StartUp {
 
 		wait.until(
 				ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[contains(@class,'body-content')]")));
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("MainContent_txtJobID")));
+
+		js.executeScript("window.scrollBy(0,-250)");
+		Thread.sleep(2000);
 
 		for (int i = 1; i < 4; i++) {
 			DataFormatter formatter = new DataFormatter();
 			String JobID = formatter.formatCellValue(sh1.getRow(i).getCell(1));
 			System.out.println("Job Id is==" + JobID);
 			msg.append("Job Id is==" + JobID + "\n");
+			WebElement JobIDInput = driver.findElement(By.id("MainContent_txtJobID"));
+			act.moveToElement(JobIDInput).build().perform();
+			Thread.sleep(2000);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("MainContent_txtJobID")));
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("MainContent_txtJobID")));
 			driver.findElement(By.id("MainContent_txtJobID")).clear();
 			driver.findElement(By.id("MainContent_txtJobID")).sendKeys(JobID);
 

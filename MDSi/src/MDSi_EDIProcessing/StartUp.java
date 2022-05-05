@@ -28,8 +28,8 @@ public class StartUp {
 		options.addArguments("--disable-extensions");
 		options.addArguments("--no-sandbox");
 		options.addArguments("--start-maximized");
-		// options.addArguments("--headless");
-//		/options.addArguments("window-size=1032x776");
+		options.addArguments("--headless");
+		//options.addArguments("window-size=1032x776");
 		capabilities.setPlatform(Platform.ANY);
 		capabilities.setCapability(ChromeOptions.CAPABILITY, options);
 		driver = new ChromeDriver(options);
