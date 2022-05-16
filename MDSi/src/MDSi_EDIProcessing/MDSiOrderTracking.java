@@ -30,83 +30,101 @@ public class MDSiOrderTracking extends StartUp {
 		WebDriverWait wait = new WebDriverWait(driver, 50);
 		Actions act = new Actions(driver);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		driver.get("http://10.20.104.82:9077/TestApplicationUtility/MDSITrackOrderClient");
 
-		wait.until(
-				ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[contains(@class,'body-content')]")));
-		// Read data from Excel
-		File src = new File(".\\src\\TestFiles\\MDSiTestResult.xlsx");
-		FileInputStream fis = new FileInputStream(src);
-		Workbook workbook = WorkbookFactory.create(fis);
-		Sheet sh1 = workbook.getSheet("Sheet1");
-
-		js.executeScript("window.scrollBy(0,-250)");
+		String Env = storage.getProperty("Env");
+		String baseUrl = null;
+		if (Env.equalsIgnoreCase("Pre-Prod")) {
+			baseUrl = storage.getProperty("PREPRODURLOrderTrack");
+		} else if (Env.equalsIgnoreCase("STG")) {
+			baseUrl = storage.getProperty("STGURLOrderTrack");
+		} else if (Env.equalsIgnoreCase("DEV")) {
+			baseUrl = storage.getProperty("DEVURLOrderTrack");
+		}
 		Thread.sleep(2000);
+		driver.get(baseUrl);
 
-		// Default size
-		Dimension currentDimension = driver.manage().window().getSize();
-		int height = currentDimension.getHeight();
-		int width = currentDimension.getWidth();
-		System.out.println("Current height: " + height);
-		System.out.println("Current width: " + width);
-		System.out.println("window size==" + driver.manage().window().getSize());
+		try {
+			wait.until(ExpectedConditions
+					.visibilityOfAllElementsLocatedBy(By.xpath("//*[contains(@class,'body-content')]")));
+			// Read data from Excel
+			File src = new File(".\\src\\TestFiles\\MDSiTestResult.xlsx");
+			FileInputStream fis = new FileInputStream(src);
+			Workbook workbook = WorkbookFactory.create(fis);
+			Sheet sh1 = workbook.getSheet("Sheet1");
 
-		Dimension newDimension = new Dimension(745, 600);
-		driver.manage().window().setSize(newDimension);
-		Thread.sleep(2000);
-
-		WebElement JobIDLink = driver.findElement(By.id("MainContent_HyperLinkJobID"));
-		act.moveToElement(JobIDLink).build().perform();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("MainContent_HyperLinkJobID")));
-		wait.until(ExpectedConditions.elementToBeClickable(By.id("MainContent_HyperLinkJobID")));
-		act.moveToElement(JobIDLink).click().perform();
-
-		wait.until(
-				ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[contains(@class,'body-content')]")));
-
-		js.executeScript("window.scrollBy(0,-250)");
-		Thread.sleep(2000);
-
-		for (int i = 1; i < 4; i++) {
-			DataFormatter formatter = new DataFormatter();
-			String JobID = formatter.formatCellValue(sh1.getRow(i).getCell(1));
-			System.out.println("Job Id is==" + JobID);
-			msg.append("Job Id is==" + JobID + "\n");
-			WebElement JobIDInput = driver.findElement(By.id("MainContent_txtJobID"));
-			act.moveToElement(JobIDInput).build().perform();
+			js.executeScript("window.scrollBy(0,-250)");
 			Thread.sleep(2000);
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("MainContent_txtJobID")));
-			wait.until(ExpectedConditions.elementToBeClickable(By.id("MainContent_txtJobID")));
-			driver.findElement(By.id("MainContent_txtJobID")).clear();
-			driver.findElement(By.id("MainContent_txtJobID")).sendKeys(JobID);
 
-			driver.findElement(By.id("MainContent_txtUserName")).clear();
-			driver.findElement(By.id("MainContent_txtUserName")).sendKeys("MDSI_WS");
+			// Default size
+			Dimension currentDimension = driver.manage().window().getSize();
+			int height = currentDimension.getHeight();
+			int width = currentDimension.getWidth();
+			System.out.println("Current height: " + height);
+			System.out.println("Current width: " + width);
+			System.out.println("window size==" + driver.manage().window().getSize());
 
-			driver.findElement(By.id("MainContent_txtPassword")).clear();
-			driver.findElement(By.id("MainContent_txtPassword")).sendKeys("MDSI_WS_14");
+			Dimension newDimension = new Dimension(745, 600);
+			driver.manage().window().setSize(newDimension);
+			Thread.sleep(2000);
 
-			driver.findElement(By.id("MainContent_ButtonTrackOrder")).click();
-			// --Start time
-			start = System.nanoTime();
-			Thread.sleep(6000);
+			WebElement JobIDLink = driver.findElement(By.id("MainContent_HyperLinkJobID"));
+			act.moveToElement(JobIDLink).build().perform();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("MainContent_HyperLinkJobID")));
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("MainContent_HyperLinkJobID")));
+			act.moveToElement(JobIDLink).click().perform();
 
-			Screenshots.takeSnapShot(driver, ".\\src\\TestFiles\\MDSiTracking.jpg");
-			Thread.sleep(3000);
-			String Job = driver.findElement(By.id("MainContent_lblTrackOrderresult")).getText();
-			System.out.println("MDSi Track Order DONE !");
-			end = System.nanoTime();
-			TrackingTime = (end - start) * 1.0e-9;
-			System.out.println("Tracking Time (in Seconds) = " + TrackingTime);
-			msg.append("Tracking Time (in Seconds) = " + TrackingTime + "\n");
-			msg.append("Response :" + "\n" + Job + "\n\n");
+			wait.until(ExpectedConditions
+					.visibilityOfAllElementsLocatedBy(By.xpath("//*[contains(@class,'body-content')]")));
+
+			js.executeScript("window.scrollBy(0,-250)");
+			Thread.sleep(2000);
+
+			for (int i = 1; i < 4; i++) {
+				DataFormatter formatter = new DataFormatter();
+				String JobID = formatter.formatCellValue(sh1.getRow(i).getCell(1));
+				System.out.println("Job Id is==" + JobID);
+				msg.append("Job Id is==" + JobID + "\n");
+				WebElement JobIDInput = driver.findElement(By.id("MainContent_txtJobID"));
+				act.moveToElement(JobIDInput).build().perform();
+				Thread.sleep(2000);
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("MainContent_txtJobID")));
+				wait.until(ExpectedConditions.elementToBeClickable(By.id("MainContent_txtJobID")));
+				driver.findElement(By.id("MainContent_txtJobID")).clear();
+				driver.findElement(By.id("MainContent_txtJobID")).sendKeys(JobID);
+
+				driver.findElement(By.id("MainContent_txtUserName")).clear();
+				driver.findElement(By.id("MainContent_txtUserName")).sendKeys("MDSI_WS");
+
+				driver.findElement(By.id("MainContent_txtPassword")).clear();
+				driver.findElement(By.id("MainContent_txtPassword")).sendKeys("MDSI_WS_14");
+
+				driver.findElement(By.id("MainContent_ButtonTrackOrder")).click();
+				// --Start time
+				start = System.nanoTime();
+				Thread.sleep(6000);
+
+				Screenshots.takeSnapShot(driver, ".\\src\\TestFiles\\MDSiTracking.jpg");
+				Thread.sleep(3000);
+				String Job = driver.findElement(By.id("MainContent_lblTrackOrderresult")).getText();
+				System.out.println("MDSi Track Order DONE !");
+				end = System.nanoTime();
+				TrackingTime = (end - start) * 1.0e-9;
+				System.out.println("Tracking Time (in Seconds) = " + TrackingTime);
+				msg.append("Tracking Time (in Seconds) = " + TrackingTime + "\n");
+				msg.append("Response :" + "\n" + Job + "\n\n");
+
+			}
+		} catch (Exception E) {
+			msg.append("Something went wrong" + "\n");
 
 		}
-		String subject = "Selenium Automation Script STAGING : MDSi_EDI - Shipment Tracking";
+		Env = storage.getProperty("Env");
+		String subject = "Selenium Automation Script: " + Env + " MDSi_EDI - Shipment Tracking";
+		String SS = ".\\src\\TestFiles\\MDSiTracking.jpg";
 //		/// asharma@samyak.com,pgandhi@samyak.com,kunjan.modi@samyak.com,pdoshi@samyak.com
 		try {
 			Email.sendMail("ravina.prajapati@samyak.com,asharma@samyak.com,parth.doshi@samyak.com", subject,
-					msg.toString(), "");
+					msg.toString(), SS);
 		} catch (Exception ex) {
 			Logger.getLogger(MDSiOrderCreation.class.getName()).log(Level.SEVERE, null, ex);
 		}

@@ -21,7 +21,18 @@ public class MDSiOrderCreation extends StartUp {
 	@Test
 	public void mdSiOrderCreation() throws Exception {
 		long start, end;
-		String baseUrl = "http://10.20.104.82:9077/TestApplicationUtility/MDSIOrderCreation";
+
+		String Env = storage.getProperty("Env");
+		String baseUrl = null;
+		if (Env.equalsIgnoreCase("Pre-Prod")) {
+			baseUrl = storage.getProperty("PREPRODURLOrderCreat");
+		} else if (Env.equalsIgnoreCase("STG")) {
+			baseUrl = storage.getProperty("STGURLOrderCreat");
+		} else if (Env.equalsIgnoreCase("DEV")) {
+			baseUrl = storage.getProperty("DEVURLOrderCreat");
+		}
+		Thread.sleep(2000);
+
 		driver.get(baseUrl);
 
 		Thread.sleep(5000);
@@ -40,7 +51,7 @@ public class MDSiOrderCreation extends StartUp {
 					.sendKeys("C:\\Users\\rprajapati\\git\\MDSi\\MDSi\\src\\TestFiles\\" + file + ".xml");
 			Thread.sleep(1000);
 			driver.findElement(By.id("MainContent_btnProcess")).click();
-			//--Start time for checking import file 
+			// --Start time for checking import file
 			start = System.nanoTime();
 			Thread.sleep(5000);
 
@@ -85,7 +96,8 @@ public class MDSiOrderCreation extends StartUp {
 			}
 
 		}
-		String subject = "Selenium Automation Script: STAGING MDSi_EDI - Shipment Creation";
+		Env = storage.getProperty("Env");
+		String subject = "Selenium Automation Script: " + Env + " MDSi_EDI - Shipment Creation";
 		// asharma@samyak.com,pgandhi@samyak.com,kunjan.modi@samyak.com,pdoshi@samyak.com
 		try {
 
