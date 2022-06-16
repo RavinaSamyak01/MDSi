@@ -32,6 +32,8 @@ public class MDSiOrderTracking extends StartUp {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
 		String Env = storage.getProperty("Env");
+		System.out.println("Env " + Env);
+
 		String baseUrl = null;
 		if (Env.equalsIgnoreCase("Pre-Prod")) {
 			baseUrl = storage.getProperty("PREPRODURLOrderTrack");

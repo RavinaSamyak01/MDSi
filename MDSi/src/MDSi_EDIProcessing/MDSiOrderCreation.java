@@ -23,6 +23,8 @@ public class MDSiOrderCreation extends StartUp {
 		long start, end;
 
 		String Env = storage.getProperty("Env");
+		System.out.println("Env " + Env);
+
 		String baseUrl = null;
 		if (Env.equalsIgnoreCase("Pre-Prod")) {
 			baseUrl = storage.getProperty("PREPRODURLOrderCreat");
