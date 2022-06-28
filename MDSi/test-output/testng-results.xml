@@ -2,28 +2,28 @@
 <testng-results total="2" passed="2" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2022-06-16T04:07:57Z" name="MDSiSuite" finished-at="2022-06-16T04:10:48Z" duration-ms="171157">
+  <suite started-at="2022-06-28T07:57:02Z" name="MDSiSuite" finished-at="2022-06-28T08:00:58Z" duration-ms="235710">
     <groups>
     </groups>
-    <test started-at="2022-06-16T04:07:57Z" name="MDSiOrderCreation" finished-at="2022-06-16T04:09:53Z" duration-ms="115641">
+    <test started-at="2022-06-28T07:57:02Z" name="MDSiOrderCreation" finished-at="2022-06-28T07:59:50Z" duration-ms="167531">
       <class name="MDSi_EDIProcessing.MDSiOrderCreation">
-        <test-method signature="mdSiOrderCreation()[pri:0, instance:MDSi_EDIProcessing.MDSiOrderCreation@22f59fa]" started-at="2022-06-16T09:37:57Z" name="mdSiOrderCreation" finished-at="2022-06-16T09:39:53Z" duration-ms="115630" status="PASS">
+        <test-method signature="mdSiOrderCreation()[pri:0, instance:MDSi_EDIProcessing.MDSiOrderCreation@22f59fa]" started-at="2022-06-28T13:27:02Z" name="mdSiOrderCreation" finished-at="2022-06-28T13:29:50Z" duration-ms="167514" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- mdSiOrderCreation -->
       </class> <!-- MDSi_EDIProcessing.MDSiOrderCreation -->
     </test> <!-- MDSiOrderCreation -->
-    <test started-at="2022-06-16T04:09:53Z" name="MDSiOrderTracking" finished-at="2022-06-16T04:10:48Z" duration-ms="55486">
+    <test started-at="2022-06-28T07:59:50Z" name="MDSiOrderTracking" finished-at="2022-06-28T08:00:58Z" duration-ms="68136">
       <class name="MDSi_EDIProcessing.MDSiOrderTracking">
-        <test-method is-config="true" signature="startUp()[pri:0, instance:MDSi_EDIProcessing.MDSiOrderTracking@163370c2]" started-at="2022-06-16T09:37:54Z" name="startUp" finished-at="2022-06-16T09:37:57Z" duration-ms="3055" status="PASS">
+        <test-method is-config="true" signature="startUp()[pri:0, instance:MDSi_EDIProcessing.MDSiOrderTracking@163370c2]" started-at="2022-06-28T13:27:00Z" name="startUp" finished-at="2022-06-28T13:27:02Z" duration-ms="2847" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- startUp -->
-        <test-method signature="mdSiOrderTracking()[pri:0, instance:MDSi_EDIProcessing.MDSiOrderTracking@163370c2]" started-at="2022-06-16T09:39:53Z" name="mdSiOrderTracking" finished-at="2022-06-16T09:40:48Z" duration-ms="55486" status="PASS">
+        <test-method signature="mdSiOrderTracking()[pri:0, instance:MDSi_EDIProcessing.MDSiOrderTracking@163370c2]" started-at="2022-06-28T13:29:50Z" name="mdSiOrderTracking" finished-at="2022-06-28T13:30:58Z" duration-ms="68135" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- mdSiOrderTracking -->
-        <test-method is-config="true" signature="Complete()[pri:0, instance:MDSi_EDIProcessing.MDSiOrderTracking@163370c2]" started-at="2022-06-16T09:40:48Z" name="Complete" finished-at="2022-06-16T09:40:48Z" duration-ms="57" status="PASS">
+        <test-method is-config="true" signature="Complete()[pri:0, instance:MDSi_EDIProcessing.MDSiOrderTracking@163370c2]" started-at="2022-06-28T13:30:58Z" name="Complete" finished-at="2022-06-28T13:30:58Z" duration-ms="158" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Complete -->
